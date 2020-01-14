@@ -14,7 +14,6 @@ export class NoticiaComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.noticia);
   }
 
 }
