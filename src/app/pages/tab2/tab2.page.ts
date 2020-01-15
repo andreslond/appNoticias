@@ -23,13 +23,20 @@ export class Tab2Page implements OnInit {
   }
 
   cambiarSegmento(evento) {
+    this.noticias = [];
     this.cargarNoticias(evento.detail.value);
   }
 
-  cargarNoticias(categoria: string) {
+  cargarNoticias(categoria: string, event?) {
     this.noticiasService.getTopHeadLinesCategoria(categoria).subscribe(resp => {
-      this.noticias = [];
       this.noticias.push(...resp.articles);
+      if (event) {
+        event.target.complete();
+      }
     });
+  }
+
+  cargarNoticiaCategoria(event) {
+    this.cargarNoticias(this.segment.value, event);
   }
 }

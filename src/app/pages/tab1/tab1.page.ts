@@ -34,7 +34,6 @@ export class Tab1Page implements OnInit {
   }
 
   cargarMasNoticias(event) {
-    console.log(event);
     this.cargarNoticias(event);
   }
 }
