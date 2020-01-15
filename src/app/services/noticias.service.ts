@@ -15,12 +15,15 @@ const headers = new HttpHeaders({
 })
 export class NoticiasService {
 
+  headLineNumber = 0;
+
   constructor(
     private http: HttpClient
   ) { }
 
   getTopHeadlines() {
-    return this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=us`);
+    this.headLineNumber++;
+    return this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=us&page=${this.headLineNumber}`);
   }
 
   getTopHeadLinesCategoria(categoria: string) {
