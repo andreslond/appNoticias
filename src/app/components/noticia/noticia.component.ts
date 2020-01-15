@@ -14,6 +14,7 @@ export class NoticiaComponent implements OnInit {
 
   @Input() noticia: Article;
   @Input() indice: number;
+  @Input() favorito;
 
   constructor(
     private inAppBrowser: InAppBrowser,
@@ -30,6 +31,28 @@ export class NoticiaComponent implements OnInit {
 
   async lanzarMenu() {
 
+    let botonAgregarEliminar: any;
+
+    if (this.favorito) {
+      botonAgregarEliminar = {
+        text: 'Borrar',
+        icon: 'trash',
+        cssClass: 'action-dark',
+        handler: () => {
+          this.dataLocalService.borrarNoticia(this.noticia);
+        }
+      };
+    } else {
+      botonAgregarEliminar = {
+        text: 'Favorito',
+        icon: 'star',
+        cssClass: 'action-dark',
+        handler: () => {
+          this.dataLocalService.guardarNoticia(this.noticia);
+        }
+      };
+    }
+
     const actionSheet = await this.actionSheetController.create({
       buttons: [{
         text: 'Compartir',
@@ -38,14 +61,9 @@ export class NoticiaComponent implements OnInit {
         handler: () => {
           this.socialSharing.share(this.noticia.title, this.noticia.source.name, '', this.noticia.url);
         }
-      }, {
-        text: 'Favorito',
-        icon: 'star',
-        cssClass: 'action-dark',
-        handler: () => {
-          this.dataLocalService.guardarNoticia(this.noticia);
-        }
-      }, {
+      },
+        botonAgregarEliminar
+        , {
         text: 'Cancel',
         icon: 'close',
         role: 'cancel',

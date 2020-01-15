@@ -6,7 +6,6 @@ import { Article } from '../Interfaces/interfaces';
   providedIn: 'root'
 })
 export class DataLocalService {
-
   noticiasFavoritas: Article[] = [];
 
   constructor(private storage: Storage) {
@@ -27,4 +26,10 @@ export class DataLocalService {
       this.noticiasFavoritas = favoritos;
     }
   }
+
+  borrarNoticia(noticia: Article) {
+    this.noticiasFavoritas = this.noticiasFavoritas.filter(notiFav => noticia.title !== notiFav.title);
+    this.storage.set('favoritos', this.noticiasFavoritas);
+  }
+
 }

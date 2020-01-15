@@ -9,6 +9,7 @@ import { Article } from 'src/app/Interfaces/interfaces';
 export class NoticiasComponent implements OnInit {
 
   @Input() noticias: Article[] = [];
+  @Input() favorito = false;
 
   constructor() { }
 
