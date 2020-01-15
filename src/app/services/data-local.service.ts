@@ -10,6 +10,7 @@ export class DataLocalService {
   noticiasFavoritas: Article[] = [];
 
   constructor(private storage: Storage) {
+    this.cargarFavoritos();
   }
 
   guardarNoticia(noticia: Article) {

@@ -10,11 +10,12 @@ import { Article } from 'src/app/Interfaces/interfaces';
 export class Tab3Page {
 
   noticiasFavoritas: Article[];
+  sliderOpts = {
+    allowSlidePrev: false,
+    allowSlideNext: false
+  };
 
   constructor(public dataLocalService: DataLocalService) {
-    this.noticiasFavoritas = [];
-    this.dataLocalService.cargarFavoritos();
-    this.noticiasFavoritas = this.dataLocalService.noticiasFavoritas;
   }
 
 }
